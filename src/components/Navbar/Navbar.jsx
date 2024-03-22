@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { Link, NavLink } from "react-router-dom";
 import Sidebar from "../Sidebar/Sidebar";
+import { useContext } from "react";
+import { AuthContex } from "../../Context/UserContext";
 const Navbar = () => {
+  const { user } = useContext(AuthContex);
   return (
     <>
       <nav className="w-full sm:flex items-center justify-center fixed top-0 left-0 pt-5 z-[999] hidden">
@@ -16,6 +19,17 @@ const Navbar = () => {
             viewport={{ once: true, amount: 0.5 }}
             className="flex items-center gap-5 text-lg"
           >
+            <NavLink to="/about">About us</NavLink>
+            <NavLink to="/session">Session</NavLink>
+            {user?.role ? (
+              <>
+                <NavLink to="/profile">Profile</NavLink>
+              </>
+            ) : (
+              <>
+                <NavLink to="/login">Login</NavLink>
+              </>
+            )}
             <NavLink to="/coach">Become a Coach</NavLink>
             <NavLink to="/about">About</NavLink>
             <NavLink to='/session'>Session</NavLink>

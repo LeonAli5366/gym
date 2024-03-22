@@ -1,6 +1,48 @@
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import setTokenToLocalStroge from "../SetTokenToLocalStroge/SetTokenToLocalStroge";
+import { AuthContex } from "../../Context/UserContext";
 const Login = () => {
+  const navigate = useNavigate();
+  const { count, setCount } = useContext(AuthContex);
+  // all state
+  const [error, setError] = useState("");
+
+  // all fuctions
+  const handleLogInSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    const userData = {
+      email,
+      password,
+    };
+
+    fetch(`http://localhost:5000/api/v1/user/signin`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "success") {
+          toast.success("user account login successfully");
+          navigate("/");
+          setTokenToLocalStroge(data?.data?.token);
+          console.log(data);
+          setCount(count + 1);
+        } else {
+          setError(data.error);
+        }
+      });
+  };
   return (
     <div className="w-full h-screen bg-black login">
       <div className="background sm:w-[430px] sm:h-[520px] w-[320px] h-[350px]">
@@ -19,28 +61,39 @@ const Login = () => {
           className="shape sm:size-[200px] size-[100px] sm:-bottom-[80px] sm:-right-[80px] -bottom-[50px] -right-[25px]"
         ></motion.div>
       </div>
-      <form className="flex flex-col items-center justify-evenly text-white form sm:h-[520px] sm:w-[400px] w-[300px] h-[350px] sm:gap-0 gap-2">
+      <form
+        onSubmit={handleLogInSubmit}
+        className="flex flex-col items-center justify-evenly text-white form sm:h-[520px] sm:w-[400px] w-[300px] h-[350px] sm:gap-0 gap-2"
+      >
         <h3 className="sm:text-[2rem] text-[1.5rem] font-medium">Login Here</h3>
 
         <div className="w-full flex flex-col gap-1">
-          <label htmlFor="email" className="cursor-pointer sm:text-base text-sm">
+          <label
+            htmlFor="email"
+            className="cursor-pointer sm:text-base text-sm"
+          >
             Email
           </label>
           <input
             type="email"
             placeholder="Email"
+            name="email"
             id="email"
             className="sm:py-2 py-1 outline-none pl-2 placeholder:italic bg-[rgba(255,255,255,0.07)] rounded"
           />
         </div>
 
         <div className="w-full flex flex-col gap-1">
-          <label htmlFor="password" className="cursor-pointer sm:text-base text-sm">
+          <label
+            htmlFor="password"
+            className="cursor-pointer sm:text-base text-sm"
+          >
             Password
           </label>
           <input
             type="password"
             placeholder="Password"
+            name="password"
             id="password"
             className="sm:py-2 py-1 outline-none pl-2 placeholder:italic bg-[rgba(255,255,255,0.07)] rounded"
           />
@@ -54,7 +107,7 @@ const Login = () => {
             Signup Here!
           </Link>
         </h1>
-
+        <h1 className="text-red-600 text-center">{error}</h1>
         <button className="w-full bg-white text-black sm:py-2 py-1 mt-2 font-medium rounded hover:bg-slate-200">
           Log In
         </button>
