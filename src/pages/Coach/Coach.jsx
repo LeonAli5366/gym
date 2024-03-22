@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
 const times = [
   {
     value: "12PM - 1PM",

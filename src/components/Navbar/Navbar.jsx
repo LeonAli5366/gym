@@ -8,9 +8,9 @@ const Navbar = () => {
   return (
     <>
       <nav className="w-full sm:flex items-center justify-center fixed top-0 left-0 pt-5 z-[999] hidden">
-        <div className="glassEffect max-w-[1440px] w-full mx-auto flex items-center justify-between py-3 z-[10] px-10 rounded-full text-blue-800 font-medium">
+        <div className="glassEffect max-w-[1440px] w-full mx-auto flex items-center justify-between z-[10] px-10 rounded-full text-blue-800 font-medium">
           <Link to="/" className="text-lg">
-            logo
+            <img src="https://i.postimg.cc/zvSRVMKG/logo-1.png" alt="" className="w-20" />
           </Link>
           <motion.div
             initial={{ opacity: 0 }}
@@ -36,6 +36,7 @@ const Navbar = () => {
         </div>
       </nav>
       <Sidebar />
+      <img src="https://i.postimg.cc/zvSRVMKG/logo-1.png" alt="" className="w-20 fixed top-[25px] right-[25px] sm:hidden block z-[999]" />
     </>
   );
 };
