@@ -22,7 +22,6 @@ const Navbar = () => {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/about">About</NavLink>
             <NavLink to="/session">Session</NavLink>
-            <NavLink to="/coach">Become a Coach</NavLink>
             {user?.role ? (
               <>
                 <NavLink to="/coach">Become a Coach</NavLink>

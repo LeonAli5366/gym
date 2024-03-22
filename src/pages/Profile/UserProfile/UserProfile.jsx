@@ -1,15 +1,26 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContex } from "../../../Context/UserContext";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
+import SessionSingleForUser from "./SessionSingleForUser";
 
 const UserProfile = () => {
   const [show, setShow] = useState("Home");
   const [loading, setLoading] = useState(false);
   const [showUpdate, setShowUpdate] = useState(false);
+  const [session, setSession] = useState([]);
   const { user, logOut, count, setCount } = useContext(AuthContex);
   const { photo, lastName, email, firstName } = user;
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/v1/user/bookings?email=${email}`)
+      .then((res) => res.json())
+      .then((data) => setSession(data.bookings));
+  }, [user, email]);
+
+  console.log(session);
 
   const handleUpdateProfilePhoto = (event) => {
     setLoading(true);
@@ -30,7 +41,6 @@ const UserProfile = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data?.url) {
-
           //   update photo
           const updateData = {
             photo: data.url,
@@ -86,14 +96,6 @@ const UserProfile = () => {
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 border border-blue-700 rounded w-full mt-5"
         >
           Log Out
-        </button>
-        <button
-          onClick={() => {
-            logOut();
-          }}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 border border-blue-700 rounded w-full mt-5"
-        >
-          Delete Account
         </button>
       </div>
       <div className="w-3/4 mx-10 text-center">
@@ -151,6 +153,9 @@ const UserProfile = () => {
             </div>
           </div>
         </div>
+        <div className={`${show === "session" ? "" : "hidden"}`}>{
+          session.map(data => <SessionSingleForUser key={data._id} session={data}></SessionSingleForUser>)
+        }</div>
       </div>
     </div>
   );
