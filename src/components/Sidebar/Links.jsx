@@ -29,29 +29,17 @@ const links = [
     path: "",
   },
   {
-    name: "About Us",
-    path: "about-us",
+    name: "About",
+    path: "about",
   },
   {
-    name: "Get Informed",
-    path: "get-informed",
+    name: "Session",
+    path: "session",
   },
   {
-    name: "Take Action",
-    path: "take-action",
-  },
-  {
-    name: "Contact Us",
-    path: "contact-us",
-  },
-  {
-    name: "Blog",
-    path: "blog",
-  },
-  {
-    name: "Join The Coalition",
-    path: "join-the-coalition",
-  },
+    name: "Login",
+    path: "login",
+  }
 ];
 const Links = () => {
   return (

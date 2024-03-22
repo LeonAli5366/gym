@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const coache = [
   {
     name: "NICOLE WINTER",
@@ -60,18 +62,18 @@ const Session = () => {
       <h1 className="anton text-5xl text-center">
         Book a Session with your favourite coach
       </h1>
-      <div className="w-full grid grid-cols-4 gap-10 px-10 py-24">
+      <div className="w-full grid sm:grid-cols-4 gap-10 sm:px-10 py-24">
         {coache?.map((data, i) => (
           <div
             key={i}
-            className="w-full h-[600px] flex flex-col items-center justify-center gap-5 text-white hover:opacity-50"
+            className="w-full h-[600px] flex flex-col items-center justify-center text-white"
             style={{
               backgroundImage: `url(${data.img})`,
               backgroundPosition: "center",
               backgroundSize: "cover",
             }}
           >
-            <div className="flex flex-col items-start gap-2">
+            <div className="w-full h-full flex flex-col items-center justify-center sm:opacity-0 opacity-100 gap-2 card-prop">
               <h1 className="anton text-3xl">Name : {data.name}</h1>
               <div className="flex items-center gap-5 anton text-xl">
                 <h1>Age : {data.age}</h1>
@@ -79,10 +81,15 @@ const Session = () => {
               </div>
               <h1 className="anton text-xl">Gender : {data.gender}</h1>
               <h1 className="anton text-xl">Phone : {data.phone}</h1>
+              <div className="w-full flex items-center justify-center py-3">
+                <Link
+                  to={`/session/${i}`}
+                  className="px-5 py-2 bg-white text-black rounded-md font-medium"
+                >
+                  Book a Session
+                </Link>
+              </div>
             </div>
-            <button className="px-5 py-2 bg-white text-black rounded-md font-medium">
-              Book a Session
-            </button>
           </div>
         ))}
       </div>

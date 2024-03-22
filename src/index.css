@@ -10,6 +10,18 @@
   }
 }
 @layer components {
+  .card-prop {
+    opacity: 0;
+  }
+  .card-prop:hover {
+    transition: opacity 0.3s linear;
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.13);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
   .anton {
     font-family: "Anton", sans-serif;
   }
@@ -20,8 +32,8 @@
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   }
-  .background {
 
+  .background {
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;
@@ -49,5 +61,17 @@
     border: 2px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
     padding: 50px 35px;
+  }
+
+  .rdp {
+    --rdp-cell-size: 40px; /* Size of the day cells. */
+    --rdp-caption-font-size: 18px; /* Font size for the caption labels. */
+    --rdp-accent-color: #a7a7d8; /* Accent color for the background of selected days. */
+    --rdp-background-color: #e7edff; /* Background color for the hovered/focused elements. */
+    --rdp-accent-color-dark: #6047c3; /* Accent color for the background of selected days (to use in dark-mode). */
+    --rdp-background-color-dark: #6352a7; /* Background color for the hovered/focused elements (to use in dark-mode). */
+    --rdp-outline: 2px solid var(--rdp-accent-color); /* Outline border for focused elements */
+    --rdp-outline-selected: 3px solid var(--rdp-accent-color); /* Outline border for focused _and_ selected elements */
+    --rdp-selected-color: #0641a7; /* Color of selected day text */
   }
 }

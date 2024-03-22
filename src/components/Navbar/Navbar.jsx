@@ -16,7 +16,8 @@ const Navbar = () => {
             viewport={{ once: true, amount: 0.5 }}
             className="flex items-center gap-5 text-lg"
           >
-            <NavLink to="/about">About us</NavLink>
+            <NavLink to="/coach">Become a Coach</NavLink>
+            <NavLink to="/about">About</NavLink>
             <NavLink to='/session'>Session</NavLink>
             <NavLink to="/login">Login</NavLink>
           </motion.div>

@@ -40,7 +40,7 @@ const coache = [
 ];
 const About = () => {
   return (
-    <div className="w-full grid grid-cols-3 gap-5 p-24">
+    <div className="w-full grid sm:grid-cols-3 gap-5 sm:p-24">
       {coache.map((data, i) => (
         <motion.div
           initial={{ opacity: 0, y: 50 }}
