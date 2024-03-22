@@ -19,8 +19,10 @@ const Navbar = () => {
             viewport={{ once: true, amount: 0.5 }}
             className="flex items-center gap-5 text-lg"
           >
-            <NavLink to="/about">About us</NavLink>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/about">About</NavLink>
             <NavLink to="/session">Session</NavLink>
+            <NavLink to="/coach">Become a Coach</NavLink>
             {user?.role ? (
               <>
                 <NavLink to="/profile">Profile</NavLink>
@@ -30,10 +32,6 @@ const Navbar = () => {
                 <NavLink to="/login">Login</NavLink>
               </>
             )}
-            <NavLink to="/coach">Become a Coach</NavLink>
-            <NavLink to="/about">About</NavLink>
-            <NavLink to='/session'>Session</NavLink>
-            <NavLink to="/login">Login</NavLink>
           </motion.div>
         </div>
       </nav>

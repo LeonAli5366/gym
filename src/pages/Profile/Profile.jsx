@@ -9,13 +9,13 @@ const Profile = () => {
   const { user } = useContext(AuthContex);
   return (
     <div>
-      <div className={`${user?.role === 'admin' ? "" : "hidden"}`}>
+      <div className={`${user?.role === "admin" ? "" : "hidden"}`}>
         <AdminProfile></AdminProfile>
       </div>
-      <div className={`${user?.role === 'user' ? "" : "hidden"}`}>
+      <div className={`${user?.role === "user" ? "" : "hidden"}`}>
         <UserProfile></UserProfile>
       </div>
-      <div className={`${user?.role === 'coach' ? "" : "hidden"}`}>
+      <div className={`${user?.role === "coach" ? "" : "hidden"}`}>
         <CoachProfile></CoachProfile>
       </div>
     </div>
