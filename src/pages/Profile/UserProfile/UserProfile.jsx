@@ -30,7 +30,6 @@ const UserProfile = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data?.url) {
-          console.log(data);
 
           //   update photo
           const updateData = {

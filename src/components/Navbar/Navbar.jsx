@@ -23,6 +23,7 @@ const Navbar = () => {
             <NavLink to="/session">Session</NavLink>
             {user?.role ? (
               <>
+                <NavLink to="/coach">Become a Coach</NavLink>
                 <NavLink to="/profile">Profile</NavLink>
               </>
             ) : (
@@ -30,10 +31,6 @@ const Navbar = () => {
                 <NavLink to="/login">Login</NavLink>
               </>
             )}
-            <NavLink to="/coach">Become a Coach</NavLink>
-            <NavLink to="/about">About</NavLink>
-            <NavLink to='/session'>Session</NavLink>
-            <NavLink to="/login">Login</NavLink>
           </motion.div>
         </div>
       </nav>

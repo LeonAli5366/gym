@@ -28,7 +28,6 @@ const UserContex = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
-          console.log(data);
           setUser(data.userData)
         } else {
           navigate("/login");
