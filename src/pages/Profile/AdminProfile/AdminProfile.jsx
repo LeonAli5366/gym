@@ -38,8 +38,6 @@ const AdminProfile = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data?.url) {
-          console.log(data);
-
           //   update photo
           const updateData = {
             photo: data.url,

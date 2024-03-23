@@ -36,7 +36,6 @@ const Login = () => {
           toast.success("user account login successfully");
           navigate("/");
           setTokenToLocalStroge(data?.data?.token);
-          console.log(data?.data?.token);
           setCount(count + 1);
         } else {
           setError(data.error);

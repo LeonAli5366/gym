@@ -196,7 +196,6 @@ const Coach = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
-          console.log(data);
           setError(data.error);
         } else {
           toast.success("coach application submited successfully");

@@ -10,6 +10,7 @@ const UserProfile = () => {
   const [show, setShow] = useState("Home");
   const [loading, setLoading] = useState(false);
   const [showUpdate, setShowUpdate] = useState(false);
+  const [refresh, setRefresh] = useState(1);
   const [session, setSession] = useState([]);
   const { user, logOut, count, setCount } = useContext(AuthContex);
   const { photo, lastName, email, firstName } = user;
@@ -18,9 +19,7 @@ const UserProfile = () => {
     fetch(`http://localhost:5000/api/v1/user/bookings?email=${email}`)
       .then((res) => res.json())
       .then((data) => setSession(data.bookings));
-  }, [user, email]);
-
-  console.log(session);
+  }, [user, email, refresh]);
 
   const handleUpdateProfilePhoto = (event) => {
     setLoading(true);
@@ -160,6 +159,8 @@ const UserProfile = () => {
                 <SessionSingleForUser
                   key={data._id}
                   session={data}
+                  refresh={refresh}
+                  setRefresh={setRefresh}
                 ></SessionSingleForUser>
               ))}
             </div>

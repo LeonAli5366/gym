@@ -1,12 +1,35 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
+import toast from "react-hot-toast";
 
-const SessionSingleForUser = ({ session }) => {
-  const { userEmail, coach, date, time } = session;
-  console.log(session);
+const SessionSingleForUser = ({ session, setRefresh, refresh }) => {
+  const { userEmail, coach, date, time, _id } = session;
   const workTime = session.coach.workTime;
+  const handleUpdateUserSeassion = (event) => {
+    event.preventDefault();
+    const workTime = event.target.workTime.value;
+
+    const updateData = {
+      workTime,
+      _id,
+    };
+    fetch(`http://localhost:5000/api/v1/booking/update`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updateData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast.success("Time updated successfully");
+      });
+  };
   return (
-    <form className=" flex flex-col items-start gap-5 border rounded bg-blue-500 p-10 text-white">
+    <form
+      onSubmit={handleUpdateUserSeassion}
+      className=" flex flex-col items-start gap-5 border rounded bg-blue-500 p-10 text-white"
+    >
       <div className="flex items-center gap-3">
         {coach?.photo ? (
           <img
@@ -24,8 +47,15 @@ const SessionSingleForUser = ({ session }) => {
       </div>
       <div className="flex items-center gap-10">
         <h1>{date}</h1>
-        <select className="px-16 text-black rounded outline-none">
-          {/* {workTime.map((data, i) => {console.log(data)})} */}
+        <select
+          name="workTime"
+          className="py-2 px-2 text-black rounded outline-none"
+        >
+          {workTime.map((data, i) => (
+            <option key={data} value={data}>
+              {data}
+            </option>
+          ))}
         </select>
       </div>
       <div className="w-full flex items-center gap-3 text-black font-medium">
