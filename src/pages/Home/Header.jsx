@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -20,14 +21,14 @@ const Header = () => {
       >
         TRAIN ON YOUR OWN <br /> TIME.
       </motion.h1>
-      <div className="sm:pr-24 pb-16 pl-10">
+      <Link to='/coach' className="sm:pr-24 pb-16 pl-10">
         <motion.button initial={{ opacity: 0, x: 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, type: "spring", stiffness: 150 }}
         viewport={{ once: true, amount: 0.5 }} className="sm:px-24 sm:py-7 px-5 py-2 rounded-full bg-transparent border uppercase text-white font-medium hover:bg-white hover:text-black transition-colors duration-300">
           Join our gym
         </motion.button>
-      </div>
+      </Link>
     </div>
   );
 };

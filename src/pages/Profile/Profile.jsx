@@ -9,6 +9,7 @@ const Profile = () => {
   const { user } = useContext(AuthContex);
   return (
     <div>
+      
       <div className={`${user?.role === "admin" ? "" : "hidden"}`}>
         <AdminProfile></AdminProfile>
       </div>

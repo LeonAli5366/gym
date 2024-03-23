@@ -7,6 +7,7 @@ import { ClipLoader } from "react-spinners";
 const CoachProfile = () => {
   const [show, setShow] = useState("Home");
   const [loading, setLoading] = useState(false);
+  
   const [showUpdate, setShowUpdate] = useState(false);
   const { user, logOut, count, setCount } = useContext(AuthContex);
   const { photo, lastName, email, firstName } = user;

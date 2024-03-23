@@ -1,46 +1,23 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContex } from "../../../Context/UserContext";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
-const users = [
-  {
-    id: "dfgd343",
-    name: "kjerht",
-    role: "user",
-    email: "lenalmi@fndkj",
-  },
-  {
-    id: "dfgd343",
-    name: "kjerht",
-    role: "user",
-    email: "lenalmi@fndkj",
-  },
-  {
-    id: "dfgd343",
-    name: "kjerht",
-    role: "user",
-    email: "lenalmi@fndkj",
-  },
-  {
-    id: "dfgd343",
-    name: "kjerht",
-    role: "user",
-    email: "lenalmi@fndkj",
-  },
-  {
-    id: "dfgd343",
-    name: "kjerht",
-    role: "user",
-    email: "lenalmi@fndkj",
-  },
-];
+import SingleProfile from "./SingleProfile";
+
 const AdminProfile = () => {
   const [show, setShow] = useState("Home");
   const [loading, setLoading] = useState(false);
   const [showUpdate, setShowUpdate] = useState(false);
+  const [applications, setApplications] = useState([]);
   const { user, logOut, count, setCount } = useContext(AuthContex);
   const { photo, lastName, email, firstName } = user;
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/v1/admin//allApplications`)
+      .then((res) => res.json())
+      .then((data) => setApplications(data.applications));
+  }, []);
 
   const handleUpdateProfilePhoto = (event) => {
     setLoading(true);
@@ -92,6 +69,7 @@ const AdminProfile = () => {
         }
       });
   };
+
   return (
     <div className="my-28 flex  mx-20 min-h-screen">
       <div className="w-[300px] rounded pt-5">
@@ -111,7 +89,7 @@ const AdminProfile = () => {
         >
           Apllication
         </button>
-        
+
         <button
           onClick={() => {
             logOut();
@@ -120,7 +98,6 @@ const AdminProfile = () => {
         >
           Log Out
         </button>
-        
       </div>
       <div className="w-3/4 mx-10 text-center">
         <div className={`${show === "Home" ? "" : "hidden"}`}>
@@ -179,27 +156,8 @@ const AdminProfile = () => {
         </div>
         <div className={`${show === "application" ? "" : "hidden"} pt-10`}>
           <div className="w-full grid gap-10">
-            {users.map((data) => (
-              <div
-                key={data.id}
-                className="w-full rounded-md flex flex-col items-center text-white justify-center bg-blue-500 gap-1 py-10"
-              >
-                <img src={photo} alt="" className="max-w-[200px] w-full" />
-                <span className="anton text-left pt-5">Name : {data.name}</span>
-                <span className="anton text-left">Email : {data.email}</span>
-                <span className="anton text-left">Phone : +8801833952228</span>
-                <span className="anton text-left">Height : 1.75m</span>
-                <span className="anton text-left">Age : 25</span>
-                <span className="anton text-left">Gender : Male</span>
-                <div className="w-full flex items-center justify-between gap-5 px-10 pt-10">
-                  <button className="w-full py-3 rounded-md bg-slate-200 transition-colors duration-300 text-black font-medium text-lg hover:bg-white">
-                    Reject
-                  </button>
-                  <button className="w-full py-3 rounded-md bg-slate-200 transition-colors duration-300 text-black font-medium text-lg hover:bg-white">
-                    Accept
-                  </button>
-                </div>
-              </div>
+            {applications.map((data) => (
+              <SingleProfile key={data._id} application={data}></SingleProfile>
             ))}
           </div>
         </div>
