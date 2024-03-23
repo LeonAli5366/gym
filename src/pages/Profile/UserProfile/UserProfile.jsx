@@ -62,7 +62,7 @@ const UserProfile = () => {
   };
   return (
     <div className="my-28 flex  mx-20 min-h-screen">
-      <div className="w-[300px] border-2 rounded pt-5">
+      <div className="w-[300px] rounded pt-5">
         <button
           onClick={() => {
             setShow("Home");
@@ -73,11 +73,27 @@ const UserProfile = () => {
         </button>
         <button
           onClick={() => {
+            setShow("session");
+          }}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 border border-blue-700 rounded w-full mt-5"
+        >
+          Session
+        </button>
+        <button
+          onClick={() => {
             logOut();
           }}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 border border-blue-700 rounded w-full mt-5"
         >
           Log Out
+        </button>
+        <button
+          onClick={() => {
+            logOut();
+          }}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 border border-blue-700 rounded w-full mt-5"
+        >
+          Delete Account
         </button>
       </div>
       <div className="w-3/4 mx-10 text-center">
@@ -85,7 +101,7 @@ const UserProfile = () => {
           <h1 className="text-5xl font-bold">User Profile</h1>
           <div>
             <img
-              className="w-[250px] h-[200px] rounded-full mx-auto mt-5"
+              className="size-[250px] rounded-full mx-auto mt-5 object-cover object-center"
               src={photo}
               alt=""
             />
