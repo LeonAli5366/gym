@@ -153,9 +153,22 @@ const UserProfile = () => {
             </div>
           </div>
         </div>
-        <div className={`${show === "session" ? "" : "hidden"}`}>{
-          session.map(data => <SessionSingleForUser key={data._id} session={data}></SessionSingleForUser>)
-        }</div>
+        <div className={`${show === "session" ? "" : "hidden"}`}>
+          {session ? (
+            <div className="w-full grid grid-cols-3 gap-5">
+              {session.map((data) => (
+                <SessionSingleForUser
+                  key={data._id}
+                  session={data}
+                ></SessionSingleForUser>
+              ))}
+            </div>
+          ) : (
+            <div className="w-full flex justify-center">
+              <span className="text-xl anton">You dont have any session</span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { format } from "date-fns";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { AuthContex } from "../../Context/UserContext";
@@ -48,6 +48,13 @@ const SessionSingle = () => {
         setCoach(data.coach);
       });
   }, [id]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/v1/feedback/all?id=${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }, [id]);
 
   const handleBookSeason = (event) => {
     event.preventDefault();
@@ -75,6 +82,11 @@ const SessionSingle = () => {
         console.log(data);
       });
   };
+
+  const commentRef = useRef()
+  const handleSubmit=()=>{
+
+  }
 
   return (
     <form
@@ -122,40 +134,83 @@ const SessionSingle = () => {
       </div>
       <div className="w-full flex flex-col pt-10 gap-5">
         <h1 className="anton text-3xl text-center">Give Feedback</h1>
-        <div className="w-full flex flex-col gap-3">
+        <form onSubmit={()=>handleSubmit()} className="w-full flex flex-col gap-3">
           <textarea
             name=""
             id=""
+            ref={commentRef}
             className="pb-24 bg-slate-100 border pl-3 pt-2 text-lg"
           ></textarea>
           <div className="w-full flex items-center justify-end">
-            <button className="px-5 py-2 bg-blue-500 rounded text-white font-medium hover:bg-blue-600">
+            <button type="submit" className="px-5 py-2 bg-blue-500 rounded text-white font-medium hover:bg-blue-600">
               Submit
             </button>
           </div>
-        </div>
+        </form>
         <div className="w-full grid gap-5">
-            <div className="w-full flex flex-col items-start border justify-center p-10 gap-2">
-                <div className="flex items-center gap-3">
-                <div className="size-10 rounded-full bg-slate-300"></div>
-                <h1 className="text-lg font-medium">Leon Ali</h1>
-                </div>
-                <h1 className="text-pretty font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, numquam beatae cupiditate vero iure totam voluptates minus doloribus aperiam similique adipisci deserunt illum odit error, sed dicta eum unde delectus ullam ipsam, quam reprehenderit. Assumenda harum cupiditate pariatur. Beatae, quod aspernatur. Eaque, sint voluptatibus esse accusantium eligendi cumque dolorum quod eveniet voluptatum repudiandae dolore distinctio numquam rerum, veritatis molestias atque debitis. Numquam enim beatae eligendi eveniet illum, quisquam voluptas aut harum assumenda modi, necessitatibus tempore esse sunt ad possimus eum magni mollitia temporibus saepe suscipit fugiat culpa quia voluptate accusantium. Officia eligendi eos vero accusamus adipisci quidem quis ipsum soluta.</h1>
+          <div className="w-full flex flex-col items-start border justify-center p-10 gap-2">
+            <div className="flex items-center gap-3">
+              <div className="size-10 rounded-full bg-slate-300"></div>
+              <h1 className="text-lg font-medium">Leon Ali</h1>
             </div>
-            <div className="w-full flex flex-col items-start border justify-center p-10 gap-2">
-                <div className="flex items-center gap-3">
-                <div className="size-10 rounded-full bg-slate-300"></div>
-                <h1 className="text-lg font-medium">Leon Ali</h1>
-                </div>
-                <h1 className="text-pretty font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, numquam beatae cupiditate vero iure totam voluptates minus doloribus aperiam similique adipisci deserunt illum odit error, sed dicta eum unde delectus ullam ipsam, quam reprehenderit. Assumenda harum cupiditate pariatur. Beatae, quod aspernatur. Eaque, sint voluptatibus esse accusantium eligendi cumque dolorum quod eveniet voluptatum repudiandae dolore distinctio numquam rerum, veritatis molestias atque debitis. Numquam enim beatae eligendi eveniet illum, quisquam voluptas aut harum assumenda modi, necessitatibus tempore esse sunt ad possimus eum magni mollitia temporibus saepe suscipit fugiat culpa quia voluptate accusantium. Officia eligendi eos vero accusamus adipisci quidem quis ipsum soluta.</h1>
+            <h1 className="text-pretty font-medium">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa,
+              numquam beatae cupiditate vero iure totam voluptates minus
+              doloribus aperiam similique adipisci deserunt illum odit error,
+              sed dicta eum unde delectus ullam ipsam, quam reprehenderit.
+              Assumenda harum cupiditate pariatur. Beatae, quod aspernatur.
+              Eaque, sint voluptatibus esse accusantium eligendi cumque dolorum
+              quod eveniet voluptatum repudiandae dolore distinctio numquam
+              rerum, veritatis molestias atque debitis. Numquam enim beatae
+              eligendi eveniet illum, quisquam voluptas aut harum assumenda
+              modi, necessitatibus tempore esse sunt ad possimus eum magni
+              mollitia temporibus saepe suscipit fugiat culpa quia voluptate
+              accusantium. Officia eligendi eos vero accusamus adipisci quidem
+              quis ipsum soluta.
+            </h1>
+          </div>
+          <div className="w-full flex flex-col items-start border justify-center p-10 gap-2">
+            <div className="flex items-center gap-3">
+              <div className="size-10 rounded-full bg-slate-300"></div>
+              <h1 className="text-lg font-medium">Leon Ali</h1>
             </div>
-            <div className="w-full flex flex-col items-start border justify-center p-10 gap-2">
-                <div className="flex items-center gap-3">
-                <div className="size-10 rounded-full bg-slate-300"></div>
-                <h1 className="text-lg font-medium">Leon Ali</h1>
-                </div>
-                <h1 className="text-pretty font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, numquam beatae cupiditate vero iure totam voluptates minus doloribus aperiam similique adipisci deserunt illum odit error, sed dicta eum unde delectus ullam ipsam, quam reprehenderit. Assumenda harum cupiditate pariatur. Beatae, quod aspernatur. Eaque, sint voluptatibus esse accusantium eligendi cumque dolorum quod eveniet voluptatum repudiandae dolore distinctio numquam rerum, veritatis molestias atque debitis. Numquam enim beatae eligendi eveniet illum, quisquam voluptas aut harum assumenda modi, necessitatibus tempore esse sunt ad possimus eum magni mollitia temporibus saepe suscipit fugiat culpa quia voluptate accusantium. Officia eligendi eos vero accusamus adipisci quidem quis ipsum soluta.</h1>
+            <h1 className="text-pretty font-medium">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa,
+              numquam beatae cupiditate vero iure totam voluptates minus
+              doloribus aperiam similique adipisci deserunt illum odit error,
+              sed dicta eum unde delectus ullam ipsam, quam reprehenderit.
+              Assumenda harum cupiditate pariatur. Beatae, quod aspernatur.
+              Eaque, sint voluptatibus esse accusantium eligendi cumque dolorum
+              quod eveniet voluptatum repudiandae dolore distinctio numquam
+              rerum, veritatis molestias atque debitis. Numquam enim beatae
+              eligendi eveniet illum, quisquam voluptas aut harum assumenda
+              modi, necessitatibus tempore esse sunt ad possimus eum magni
+              mollitia temporibus saepe suscipit fugiat culpa quia voluptate
+              accusantium. Officia eligendi eos vero accusamus adipisci quidem
+              quis ipsum soluta.
+            </h1>
+          </div>
+          <div className="w-full flex flex-col items-start border justify-center p-10 gap-2">
+            <div className="flex items-center gap-3">
+              <div className="size-10 rounded-full bg-slate-300"></div>
+              <h1 className="text-lg font-medium">Leon Ali</h1>
             </div>
+            <h1 className="text-pretty font-medium">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa,
+              numquam beatae cupiditate vero iure totam voluptates minus
+              doloribus aperiam similique adipisci deserunt illum odit error,
+              sed dicta eum unde delectus ullam ipsam, quam reprehenderit.
+              Assumenda harum cupiditate pariatur. Beatae, quod aspernatur.
+              Eaque, sint voluptatibus esse accusantium eligendi cumque dolorum
+              quod eveniet voluptatum repudiandae dolore distinctio numquam
+              rerum, veritatis molestias atque debitis. Numquam enim beatae
+              eligendi eveniet illum, quisquam voluptas aut harum assumenda
+              modi, necessitatibus tempore esse sunt ad possimus eum magni
+              mollitia temporibus saepe suscipit fugiat culpa quia voluptate
+              accusantium. Officia eligendi eos vero accusamus adipisci quidem
+              quis ipsum soluta.
+            </h1>
+          </div>
         </div>
       </div>
     </form>
